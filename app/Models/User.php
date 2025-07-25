@@ -29,9 +29,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    /**
-     * Get the products owned by the user.
-     */
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

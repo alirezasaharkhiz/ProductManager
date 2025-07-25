@@ -19,17 +19,11 @@ class ProductVersion extends Model
         'changes' => 'json',
     ];
 
-    /**
-     * Get the product that the version belongs to.
-     */
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
 
-    /**
-     * Get the user who made the change.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
