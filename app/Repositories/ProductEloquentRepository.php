@@ -10,9 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductEloquentRepository implements ProductRepositoryInterface
 {
-    /**
-     * Get products for a specific user with optional sorting.
-     */
     public function getProductsForUser(int $userId, string $sortBy, string $sortOrder, int $perPage = 15): LengthAwarePaginator
     {
         $query = Product::where('user_id', $userId)
@@ -28,9 +25,6 @@ class ProductEloquentRepository implements ProductRepositoryInterface
         return $query->paginate($perPage);
     }
 
-    /**
-     * Find a product by ID for a specific user.
-     */
     public function findForUser(int $productId, int $userId): ?Product
     {
         return Product::where('id', $productId)
@@ -38,25 +32,16 @@ class ProductEloquentRepository implements ProductRepositoryInterface
             ->first();
     }
 
-    /**
-     * Create a new product.
-     */
     public function create(array $data): Product
     {
         return Product::create($data);
     }
 
-    /**
-     * Update an existing product.
-     */
     public function update(Product $product, array $data): bool
     {
         return $product->update($data);
     }
 
-    /**
-     * Sync attributes for a product.
-     */
     public function syncAttributes(Product $product, array $attributesData): void
     {
         $syncData = [];
@@ -66,17 +51,11 @@ class ProductEloquentRepository implements ProductRepositoryInterface
         $product->attributes()->sync($syncData);
     }
 
-    /**
-     * Get all versions for a given product.
-     */
     public function getProductVersions(Product $product): HasMany
     {
         return $product->versions()->orderBy('created_at', 'desc');
     }
 
-    /**
-     * Find a specific version for a given product.
-     */
     public function findProductVersion(Product $product, int $versionId): ?ProductVersion
     {
         return $product->versions()->find($versionId);
