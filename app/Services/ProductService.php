@@ -91,6 +91,7 @@ class ProductService implements ProductServiceInterface // Implement the interfa
         // Separate product data from attributes data
         $productData = Arr::except($data, ['attributes']);
 
+
         return DB::transaction(function () use ($product, $productData, $data) {
             $this->productRepository->update($product, $productData);
 
