@@ -15,7 +15,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->decimal('price', 10, 2);
             $table->integer('stock')->default(0);
-            $table->foreignId('category_id')->constrained()->onDelete('restrict'); // restrict to prevent deleting categories with products
+            $table->foreignId('category_id')->constrained()->onDelete('restrict');
             $table->timestamps();
         });
     }
